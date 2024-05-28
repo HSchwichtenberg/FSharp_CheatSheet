@@ -1,0 +1,3 @@
+﻿module Strukturen
+
+// TODO: Strukturen

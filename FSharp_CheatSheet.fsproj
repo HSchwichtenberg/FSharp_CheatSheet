@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+ <PropertyGroup>
+  <OutputType>Exe</OutputType>
+  <TargetFramework>net8.0</TargetFramework>
+  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+ </PropertyGroup>
+
+ <ItemGroup>
+
+  <Compile Include="Utilities\CUI.fs" />
+
+  <Compile Include="Basiskonstrukte.fs" />
+  <Compile Include="Operatoren.fs" />
+  <Compile Include="Bedingungen.fs" />
+  <Compile Include="Schleifen.fs" />
+  <Compile Include="Funktionen.fs" />
+  <Compile Include="Fehlerbehandlung.fs" />
+  <Compile Include="LINQ.fs" />
+  <Compile Include="Datenstrukturen.fs" />
+  <Compile Include="Mengen.fs" />
+  <Compile Include="Computations.fs" />
+  <Compile Include="Klassen.fs" />
+  <Compile Include="KlassenClient.fs" />
+  <Compile Include="Strukturen.fs" />
+  <Compile Include="Program.fs" />
+ </ItemGroup>
+
+ <ItemGroup>
+  <PackageReference Include="Spectre.Console" Version="0.49.2-preview.0.5" />
+ </ItemGroup>
+
+</Project>
