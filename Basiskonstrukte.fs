@@ -68,8 +68,9 @@ und
  printfn "RegEx: %O" regEx // RegEx:a[0-9]
 
  printfn "Zahl oder null: %A" nullableZahl // Zahl oder null: 42
- nullableZahl <- Nullable() // null zuweisen
+ nullableZahl <- Nullable() // null zuweisen geht nicht mit null!
  printfn "Zahl oder null: %A" nullableZahl // Zahl oder null: <null>
+ Console.WriteLine("null an Methode übergeben: {0}", null);
 
  // Ausgabe mehrerer Werte
  printfn "%s ist älter als %d" b a // Oliver Sturm ist älter als 42
