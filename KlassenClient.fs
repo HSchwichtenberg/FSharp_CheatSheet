@@ -1,7 +1,7 @@
 ﻿module KlassenClient
 open Klassen
 
-let run =
+let start =
  CUI.h1 "Klassen nutzen"
  // Instanz erzeugen
  let p = Person("Dr. Holger", "Schwichtenberg")

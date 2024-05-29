@@ -1,7 +1,7 @@
 ﻿module Basiskonstrukte
 open System
 
-let run  =
+let start  =
  // ---------------------------------------
  CUI.h1 "Variablen und Konstanten"
 

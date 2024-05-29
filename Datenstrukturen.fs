@@ -3,7 +3,7 @@
 // Eigener Tupel-Typ
 type PersonTupel = int * string * string
 
-let run  =
+let start  =
  CUI.h1 "Datenstrukturen"
 
  // ---------------------------------------

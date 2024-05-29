@@ -2,7 +2,7 @@
 open System
 open Spectre.Console
 
-let run =
+let start =
  CUI.h1 "Operatoren"
 
  printfn "%d" (1 + 2)  // 3

@@ -1,6 +1,6 @@
 ﻿module Funktionen
 
-let run = 
+let start = 
  CUI.h1 "Funktionen"
 
  // ---------------------------------------

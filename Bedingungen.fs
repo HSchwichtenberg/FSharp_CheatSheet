@@ -2,7 +2,7 @@
 
 open System
 
-let run  =
+let start  =
  CUI.h1 "Bedingungen"
 
  // ---------------------------------------

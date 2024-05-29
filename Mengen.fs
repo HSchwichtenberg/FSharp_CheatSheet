@@ -1,6 +1,6 @@
 ﻿module Mengen
 
-let run  =
+let start  =
  CUI.h1 "Mengen"
 
  // ---------------------------------------
