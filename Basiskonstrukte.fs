@@ -76,8 +76,11 @@ und
  printfn "%s ist älter als %d" b a // Oliver Sturm ist älter als 42
  // Ausgabe mit .NET-Klasse System.Console
  Console.WriteLine(b + " ist älter als  " + a.ToString() + ".") // Oliver Sturm ist älter als 42
+ // Ausgabe in eine Zeichenkette
+ let ausgabe = sprintf "%s ist älter als %d" b a
+ printfn "%s" ausgabe
 
- // Ausgabe von interpolierten Zeichenketten (NUR ZUR KONTROLLE)
+ // Ausgabe von interpolierten Zeichenketten (NUR ZUR KONTROLLE, nicht im Cheat Sheet)
  printfn "%s" ausgabe1 // Oliver Sturm ist älter als 42
  printfn "%s" ausgabe2 // Autoren:\nOliver Sturm\nund\nDr. Holger Schwichtenberg
  printfn "%s" ausgabe3 // Autoren:\nOliver Sturm\nund\nDr. Holger Schwichtenberg

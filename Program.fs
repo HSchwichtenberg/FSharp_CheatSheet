@@ -2,9 +2,7 @@
 open System
 
 System.Console.Title <- "F# Cheat Sheet"
-
 printfn "F# Cheat Sheet / %s" System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
-
 printfn "----------------------------------\n"
 
 Basiskonstrukte.start
