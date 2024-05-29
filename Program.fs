@@ -7,9 +7,11 @@ printfn "F# Cheat Sheet / %s" System.Runtime.InteropServices.RuntimeInformation.
 
 printfn "----------------------------------\n"
 
-Basiskonstrukte.run
-Operatoren.run
-Bedingungen.run
-Schleifen.run
-Funktionen.run
-KlassenClient.run
+//Basiskonstrukte.run
+//Operatoren.run
+//Bedingungen.run
+//Schleifen.run
+//Funktionen.run
+//Datenstrukturen.run
+Mengen.run
+//KlassenClient.run
