@@ -19,3 +19,7 @@ KlassenClient.start
 Strukturen.start
 Computations.start
 LINQ.start
+
+// Status
+// 28.5.2024: Holger: Erste Version
+// 29.5.2024: Holger: Mengen und Tupel ergänzt. Ball jetzt erstmal bei Oliver
