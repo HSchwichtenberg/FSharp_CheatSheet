@@ -16,4 +16,4 @@ let start  =
  let (plz, stadt, name) = tupel1
  printfn "Teile des Tupels: %s wohnt in %d %s" name plz stadt 
 
- // TODO: Generic Types, Enums
+ // TODO: Generic Types, Enums, discriminated unions, Records

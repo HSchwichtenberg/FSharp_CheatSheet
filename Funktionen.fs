@@ -11,7 +11,7 @@ let start =
  f1
 
  // ---------------------------------------
- CUI.h2 "Funktionen mit einem Parameter"
+ CUI.h2 "Funktionen mit einem Parameter mit Typangabe"
  let f2 (name:string) = 
    printfn "Hallo, %s!" name
  
@@ -19,13 +19,21 @@ let start =
 
  // ---------------------------------------
  CUI.h2 "Funktionen mit einem Parameter mit Typinferenz"
- let f3 (name) = 
+ let f3 name = 
    printfn "Hallo, %s!" name
  
  f3 "Holger"
 
- // ---------------------------------------
+
  CUI.h2 "Funktionen mit mehreren Parametern"
+ let f6 name alter wohnort = 
+    printfn "%s ist %d Jahre alt und wohnt in" name alter wohnort
+ 
+ f6 "Holger" 51 "Essen"
+
+
+ // ---------------------------------------
+ CUI.h2 "Funktionen mit einem (Tupel-)Parameter und Typen, generell nur für Interop mit .NET"
  let f4 (name:string, alter:int) = 
     printfn "%s ist %d Jahre alt." name alter
  
@@ -42,3 +50,8 @@ let start =
 
 
 // TODO: Rekursive Funktionen, Parameter Arrays, Function Values, Lambdas, Pipelines, ...
+// ... partial application, ML-style matching syntax, active patterns,
+// ... mutual recursion
+// ... Verwendung von Funktionen beeinflusst Typherleitung
+// ... Aufrufpriorisierung
+// ... Funktionen als Argumente, Funktionen als Rückgabewerte

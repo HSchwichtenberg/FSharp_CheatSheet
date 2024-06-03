@@ -1,0 +1,127 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Funktionen
+
+#!markdown
+
+## Funktion ohne Parameter
+
+#!fsharp
+
+ let f = 
+   printfn "Hallo, Welt!"
+ 
+ f
+
+#!markdown
+
+## Funktion mit einem Parameter
+
+#!fsharp
+
+let f name = 
+   printfn "Hallo, %s!" name
+ 
+f "Holger"
+
+#!markdown
+
+## Funktion mit mehreren Parametern
+
+#!fsharp
+
+ let f name alter wohnort = 
+    printfn "%s ist %d Jahre alt und wohnt in %s" name alter wohnort
+ 
+ f "Holger" 51 "Essen"
+
+#!markdown
+
+## Funktion mit einem Parameter und Typangabe
+
+#!fsharp
+
+let f (name:string) = 
+   printfn "Hallo, %s!" name
+   
+f "Holger"
+
+#!markdown
+
+## Funktion mit einem (Tupel-)Parameter und Typangabe
+
+Viele C#-Programmierer nehmen hier fälschlich an, dass diese Funktion mehrere Parameter hat. Prüfen Sie mit der Maus die hergeleitete Signatur! Diese Syntax wird generell nur für Interop mit .NET verwendet.
+
+#!fsharp
+
+ let f (name:string, alter:int) = 
+    printfn "%s ist %d Jahre alt." name alter
+ 
+ f ("Holger", 51)
+
+#!markdown
+
+## Funktion mit mehreren Parametern und Typangabe
+
+#!fsharp
+
+ let f (name:string) (alter:int) = 
+    printfn "%s ist %d Jahre alt." name alter
+ 
+ f "Holger" 51
+
+#!markdown
+
+## Funktion mit Rückgabewert
+
+#!fsharp
+
+ let f name alter = 
+   let r = sprintf "%s ist %d Jahre alt" name alter
+   r + "." // letzter Ausdruck ist der Rückgabewert
+
+ let text = f "Holger" 51
+ printfn "%s" text
+
+ // Oder kürzer:
+ let f_ name alter = sprintf "%s ist %d Jahre alt" name alter
+
+ printfn "%s" (f_ "Holger" 51)
+
+#!markdown
+
+## Klammern beim Funktionsaufruf
+
+Funktionsaufrufe in F# verwenden keine Klammer, Parameter werden durch Leerzeichen getrennt. Stattdessen muss geklammert werden, wenn das Resultat eines Ausdrucks als Parameter an eine Funktion übergeben wird.
+
+#!fsharp
+
+let square x = x * x
+
+let square15 = square 15
+let square10plus5 = square (10 + 5)
+
+let add x y = x + y
+
+// Zum Vergleich, C#: add(10 + 3, 30 - 1)
+add (10 + 3) (30 - 1)
+// Bei Bedarf Klammern schachteln
+printfn "%d" (add (10 + 3) (30 - 1))
+
+#!markdown
+
+## Hergeleitete Typen werden durch Verwendung beeinflusst
+
+#!fsharp
+
+// Oben hat diese Funktion die Signatur int -> int -> int
+// Diesmal allerdings float -> float -> float
+let add x y = x + y
+
+// Durch diese Verwendung werden die Typen der Parameter
+// als float festgelegt. 
+printfn "%e" (add 12.4 13.6)
