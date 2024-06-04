@@ -173,3 +173,89 @@ let rec factorial = function
   | x -> factorial (x - 1) * x
 
 printfn "%d" (factorial 5)
+
+#!markdown
+
+## Funktionen als Parameter
+
+#!fsharp
+
+let rec map f = function
+  | [] -> []
+  | x :: xs -> f x :: (map f xs)
+
+let square x = x * x
+let values = [10; 20; 30]
+printfn $"Quadratzahlen: %A{map square values}"
+
+// Ad-hoc mit Lambda-Ausdruck
+printfn $"Doppelte Werte: %A{map (fun x -> x * 2) values}"
+
+#!markdown
+
+## Partial Application
+
+#!fsharp
+
+// Allgemeine Funktion addiert zwei beliebige Zahlen
+let add x y = x + y
+// Spezielle Variante addiert immer 5
+let add5 = add 5
+
+printfn "%d" (add 10 20)
+printfn "%d" (add5 25)
+
+let square x = x * x
+let values = [10; 20; 30]
+
+// Allgemeine map-Funktion ruft Funktion für jedes Element einer Liste auf
+printfn "%A" (List.map square values)
+
+// Besondere map-Funktion addiert 5 zu jedem Listenelement
+let add5List = List.map add5
+
+printfn "%A" (add5List values)
+
+#!markdown
+
+## Pipelines und Komposition
+
+#!fsharp
+
+let add5 x = x + 5
+let square x = x * x
+
+// Aufrufe können geschachtelt werden
+printfn "%d" (square (add5 17))
+// Pipelines ermöglichen eine natürliche Reihenfolge der Funktionsaufrufe
+printfn "%d" (add5 17 |> square)
+
+// Komposition -- wenn die Schritte einer Pipeline wiederverwendet werden sollen
+let add5ThenSquare = add5 >> square
+printfn "%d" (add5ThenSquare 17)
+
+#!markdown
+
+## Eigene Operatoren
+
+#!fsharp
+
+let div x y = x / y
+
+// Diese Funktion flip kann Parameter einer Funktion vertauschen
+let flip f x y = f y x
+
+printfn "10 / 5 = %e" (div 10.0 5.0)
+printfn "5 / 10 = %e" ((flip div) 10.0 5.0)
+
+// Auch der Operator / kann wie div verwendet werden
+printfn "10 / 5 = %e" ((/) 10.0 5.0)
+printfn "5 / 10 = %e" ((flip (/)) 10.0 5.0)
+
+// Statt flip einen eigenen Operator erzeugen
+let (><) = flip
+
+// Nun kann Partial Application von der rechten Seite erfolgen
+let durch5 = (/) >< 5.0
+
+printfn "10 / 5 = %e" (durch5 10.0)
