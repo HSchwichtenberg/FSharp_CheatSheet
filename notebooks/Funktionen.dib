@@ -12,10 +12,10 @@
 
 #!fsharp
 
- let f = 
+ let output = 
    printfn "Hallo, Welt!"
  
- f
+ output
 
 #!markdown
 
@@ -23,10 +23,10 @@
 
 #!fsharp
 
-let f name = 
+let greet name = 
    printfn "Hallo, %s!" name
  
-f "Holger"
+greet "Holger"
 
 #!markdown
 
@@ -34,10 +34,10 @@ f "Holger"
 
 #!fsharp
 
- let f name alter wohnort = 
+ let info name alter wohnort = 
     printfn "%s ist %d Jahre alt und wohnt in %s" name alter wohnort
  
- f "Holger" 51 "Essen"
+ info "Holger" 51 "Essen"
 
 #!markdown
 
@@ -45,10 +45,10 @@ f "Holger"
 
 #!fsharp
 
-let f (name:string) = 
+let greet (name:string) = 
    printfn "Hallo, %s!" name
    
-f "Holger"
+greet "Holger"
 
 #!markdown
 
@@ -58,10 +58,10 @@ Viele C#-Programmierer nehmen hier fälschlich an, dass diese Funktion mehrere P
 
 #!fsharp
 
- let f (name:string, alter:int) = 
+ let info (name:string, alter:int) = 
     printfn "%s ist %d Jahre alt." name alter
  
- f ("Holger", 51)
+ info ("Holger", 51)
 
 #!markdown
 
@@ -69,10 +69,10 @@ Viele C#-Programmierer nehmen hier fälschlich an, dass diese Funktion mehrere P
 
 #!fsharp
 
- let f (name:string) (alter:int) = 
+ let info (name:string) (alter:int) = 
     printfn "%s ist %d Jahre alt." name alter
  
- f "Holger" 51
+ info "Holger" 51
 
 #!markdown
 
@@ -80,17 +80,17 @@ Viele C#-Programmierer nehmen hier fälschlich an, dass diese Funktion mehrere P
 
 #!fsharp
 
- let f name alter = 
+ let infoString name alter = 
    let r = sprintf "%s ist %d Jahre alt" name alter
    r + "." // letzter Ausdruck ist der Rückgabewert
 
- let text = f "Holger" 51
+ let text = infoString "Holger" 51
  printfn "%s" text
 
  // Oder kürzer:
- let f_ name alter = sprintf "%s ist %d Jahre alt" name alter
+ let infoString2 name alter = sprintf "%s ist %d Jahre alt" name alter
 
- printfn "%s" (f_ "Holger" 51)
+ printfn "%s" (infoString2 "Holger" 51)
 
 #!markdown
 
