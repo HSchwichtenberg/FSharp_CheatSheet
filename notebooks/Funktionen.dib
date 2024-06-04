@@ -125,3 +125,37 @@ let add x y = x + y
 // Durch diese Verwendung werden die Typen der Parameter
 // als float festgelegt. 
 printfn "%e" (add 12.4 13.6)
+
+#!markdown
+
+## Rekursive Funktion
+
+#!fsharp
+
+let rec factorial x = 
+  match x with 
+  | 0 -> 1
+  | _ -> factorial (x - 1) * x
+
+printfn "%d" (factorial 5)
+
+#!markdown
+
+## Gegenseitig rekursive Funktionen
+
+#!fsharp
+
+// Funktionen, die sich gegenseitig aufrufen, müssen gemeinsam mit den Schlüsselworten
+// "rec" und "and" deklariert werden.
+
+let rec ping c v =
+    match c with
+    | 0 -> v
+    | _ -> pong (c - 1) (v + c)
+
+and pong c v =
+    match c with
+    | 0 -> v
+    | _ -> ping (c - 1) (v + c)
+
+printfn $"Ping/pong result: %d{ping 20 0}"
