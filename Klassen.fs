@@ -57,3 +57,6 @@ type Person(vorname: string, name: string) as self =
      // x <- x + 1 nicht erlaubt, da x inref ist
      y <- x + y
      z <- y + 1
+
+
+// TODO: Methoden mit optionalen Parametern, Defaultwerte, Parameter Arrays

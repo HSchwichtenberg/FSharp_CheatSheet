@@ -24,5 +24,7 @@ let start  =
  | 2 -> printfn "Die Zahl ist 2"
  | 3 -> printfn "Die Zahl ist 3"
  | _ -> printfn "Die Zahl %d ist größer als 3" z1
-
- // TODO: Pattern Matching
+ 
+ 
+// TODO: Pattern Matching
+// TODO: active patterns 
