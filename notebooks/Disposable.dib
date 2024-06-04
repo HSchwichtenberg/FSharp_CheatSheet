@@ -1,0 +1,29 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Disposable
+
+#!fsharp
+
+let createDisposable f = 
+    { new System.IDisposable with member x.Dispose() = f() }
+
+// 'use' gibt das Objekt am Ende des Kontexts frei
+let outerFunction() = 
+  use disposable = createDisposable (fun () -> printfn "Jetzt in Dispose")
+  printfn "Mit dem disposable Objekt arbeiten..."
+  printfn "Noch etwas weiter arbeiten..."
+
+outerFunction()
+
+
+// Alternativ kann 'using' präzise Blöcke definieren
+let outerFunction'() = 
+  using (createDisposable 
+          (fun () -> printfn "' Jetzt in Dispose"))
+    (fun d -> printfn "' Mit dem disposable Objekt arbeiten...")
+
+outerFunction'()

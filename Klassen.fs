@@ -28,6 +28,7 @@ type Person(vorname: string, name: string) as self =
      and set (ganzername: string) =
          let namensTeile = ganzername.Split(' ')
          if namensTeile.Length <> 2 then
+             // TODO invalidArg "GanzerName" "Ungültiger Name"
              raise (ArgumentException("Ungültiger Name"))
          Vorname <- namensTeile.[0]
          Name <- namensTeile.[1]

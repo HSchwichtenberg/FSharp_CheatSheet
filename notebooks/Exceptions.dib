@@ -1,0 +1,55 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Exceptions
+
+Hauptsächlich für die Interaktion mit .NET-APIs verwendet.
+
+#!fsharp
+
+let exceptionWerfen : unit =
+  failwith "Das ging schief!"
+
+exceptionWerfen
+
+#!fsharp
+
+let exceptionWerfenMitWert x : unit = 
+  failwithf "Das ging schief mit Wert %A" x
+
+exceptionWerfenMitWert 42  
+
+#!markdown
+
+## Eigene Exceptions und try/with, try/finally
+
+try/with und try/finally können geschachtelt, aber nicht in einem Block kombiniert werden.
+
+#!fsharp
+
+exception EigeneException
+
+exception EigeneStringException of string
+
+// raise (EigeneStringException("Oh je!"))
+
+exception ZahlMitTextException of int * string
+
+let checkNumber x = 
+  if x > 5 then
+    raise (ZahlMitTextException(x, "Zahl ist zu gross"))
+  else
+    printfn "Alles gut mit %d" x
+
+checkNumber 3
+
+try
+  try
+    checkNumber 10
+  with
+    | ZahlMitTextException (zahl, text) -> printfn "Fehler für Zahl %d: %s" zahl text
+finally
+  printfn "Jetzt aufräumen!"   

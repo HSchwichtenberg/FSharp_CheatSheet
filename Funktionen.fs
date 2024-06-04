@@ -27,7 +27,7 @@ let start =
 
  CUI.h2 "Funktionen mit mehreren Parametern"
  let f6 name alter wohnort = 
-    printfn "%s ist %d Jahre alt und wohnt in" name alter wohnort
+    printfn "%s ist %d Jahre alt und wohnt in %s" name alter wohnort
  
  f6 "Holger" 51 "Essen"
 
