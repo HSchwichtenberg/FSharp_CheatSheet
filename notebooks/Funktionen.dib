@@ -259,3 +259,28 @@ let (><) = flip
 let durch5 = (/) >< 5.0
 
 printfn "10 / 5 = %e" (durch5 10.0)
+
+#!markdown
+
+## Precomputation mit Rückgabe dynamisch erzeugter Funktionen
+
+#!fsharp
+
+open System.Collections.Generic
+
+// Parameter spezifisch typisiert, damit der generische
+// Typ 'a für die Instanziierung des HashSet verfügbar ist
+let fastLookup (list: 'a list) = 
+  // HashSet für die Liste erzeugen
+  let lookupSet = new HashSet<'a>(list)
+  // Nachschlagefunktion zurück geben
+  fun v -> 
+    lookupSet.Contains v
+
+let values = ["Oli"; "Holger"; "C#"; "F#" ]    
+
+let enthalten = fastLookup values
+
+printfn "Holger: %b" (enthalten "Holger")
+printfn "F#: %b" (enthalten "F#")
+printfn "Visual Basic: %b" (enthalten "Visual Basic")

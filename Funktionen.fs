@@ -48,10 +48,3 @@ let start =
  let text = f5 ("Holger", 51)
  printfn "%s" text  
 
-
-// TODO: Rekursive Funktionen, Parameter Arrays, Function Values, Lambdas, Pipelines, ...
-// ... partial application, ML-style matching syntax, active patterns,
-// ... mutual recursion
-// ... Verwendung von Funktionen beeinflusst Typherleitung
-// ... Aufrufpriorisierung
-// ... Funktionen als Argumente, Funktionen als Rückgabewerte
