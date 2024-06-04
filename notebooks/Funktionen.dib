@@ -159,3 +159,17 @@ and pong c v =
     | _ -> ping (c - 1) (v + c)
 
 printfn $"Ping/pong result: %d{ping 20 0}"
+
+#!markdown
+
+## Pattern-Matching-Funktion
+
+Solche Funktionen werden oft verwendet, wenn "nur" ein Match ausgeführt werden soll.
+
+#!fsharp
+
+let rec factorial = function
+  | 0 -> 1
+  | x -> factorial (x - 1) * x
+
+printfn "%d" (factorial 5)
