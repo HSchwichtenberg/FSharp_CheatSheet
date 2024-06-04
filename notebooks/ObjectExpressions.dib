@@ -1,0 +1,83 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Object Expressions
+
+#!markdown
+
+Objektausdrücke können Objekte erzeugen, ohne dass zuvor formal eine Klasse definiert wird.
+
+#!fsharp
+
+let halloObject = { new obj() with member x.ToString() = "Hallo!" }
+
+printfn "%A" halloObject 
+printfn "%s" (halloObject.GetType().FullName)
+
+#!markdown
+
+## Interfaces ad-hoc implementieren
+
+#!fsharp
+
+type IDeepThought = 
+    abstract member TheAnswer: int with get
+    abstract member AnswerString: unit -> string
+
+let adhocDeepThought = {
+    new IDeepThought with 
+        member x.TheAnswer = 42
+        member x.AnswerString() = 
+          sprintf "Die Antwort ist %d" x.TheAnswer
+    }
+
+// Nun existiert ein Object, dass das Interface implementiert, mit dem 
+// wir über die Interface-Referenz interagieren können.
+printfn "%s" (adhocDeepThought.AnswerString())
+
+#!markdown
+
+## Delegation von Interface-Methoden an ein gekapseltes Objekt
+
+#!fsharp
+
+type IDeepThought = 
+    abstract member TheAnswer: int with get
+    abstract member AnswerString: unit -> string
+
+// Dieser Typ implementiert das Interface
+type DeepThought() = 
+    interface IDeepThought with
+        member x.TheAnswer = 42
+        member x.AnswerString() = sprintf "Die Antwort ist %d" (x :> IDeepThought).TheAnswer
+
+// Dies ist ein Objekt, das den Typ DeepThought kapselt,
+// aber seine eigene Interface-Implementation hat, die
+// teilweise das gekapselte Objekt verwendet.
+let htmlDeepThought = 
+    let deepThought = DeepThought() :> IDeepThought
+    { new IDeepThought with
+        member x.TheAnswer = deepThought.TheAnswer
+        member x.AnswerString() = sprintf "<b>%s</b>" (deepThought.AnswerString()) }
+
+printfn "%A" (htmlDeepThought.AnswerString())
+
+#!markdown
+
+## Interface mit externen Parametern implementieren
+
+#!fsharp
+
+// Diese Interface-Implementation liefert einen Wert, der 
+// von aussen als Parameter der Erzeugungsfunktion übergeben wird
+let puppetDeepThought answer = 
+    { new IDeepThought with
+        member x.TheAnswer = answer
+        member x.AnswerString() = sprintf "Hm... wie wär's mit %d?" x.TheAnswer }
+
+let pdt = puppetDeepThought 35
+printfn "%A" pdt.TheAnswer
+printfn "%A" (pdt.AnswerString())
