@@ -1,0 +1,30 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Bedingungen
+
+#!fsharp
+
+let random = Random()
+let zz = random.Next(1, 11)  // Generiert eine Zufallszahl zwischen 1 und 10
+
+if zz > 5 then
+  printfn "Die Zahl %d ist größer als 5" zz
+elif zz = 5 then
+  printfn "Die Zahl ist gleich 5"
+else
+  printfn "Die Zahl %d ist kleiner als 5" zz
+
+#!markdown
+
+## Ternäre Ausdrücke
+
+#!fsharp
+
+let random = Random()
+let z1 = random.Next(1, 11)
+
+printfn $"""Die Zufallszahl %d{z1} ist {(if z1 > 5 then "größer als" elif z1 < 5 then "kleiner als" else "gleich")} 5"""

@@ -1,0 +1,186 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Pattern Matching
+
+## Einfache Werte
+
+#!fsharp
+
+// Match mit einem Element
+let nextNumber s = 
+  match s with 
+  | "eins" -> "zwei"
+  | "zwei" -> "drei"
+  | _ -> failwith "Nach drei geht's hier nicht weiter"
+
+printfn $"""Nach eins kommt %s{nextNumber "eins"}"""
+
+// Match mit mehreren Elementen und Platzhaltern
+type PointDescription =
+  | Origin
+  | OnYAxis
+  | OnXAxis
+  | SomewhereElse
+
+let describePoint x y =
+  match x, y with
+  | 0, 0 -> Origin
+  | 0, _ -> OnYAxis
+  | _, 0 -> OnXAxis
+  | _, _ -> SomewhereElse
+
+printfn $"0/0 -> %A{describePoint 0 0}"
+printfn $"0/5 -> %A{describePoint 0 5}"
+printfn $"3/0 -> %A{describePoint 3 0}"
+printfn $"2/3 -> %A{describePoint 2 3}"
+
+#!markdown
+
+## Listen
+
+#!fsharp
+
+let beschreibe l =
+  match l with
+  | [] -> "leere Liste"
+  | [x] -> sprintf "einen Wert: %d" x
+  | [x; y] -> sprintf "zwei Werte: %d und %d" x y
+  | x::y::z::rest -> sprintf "beginnt mit %d, %d, %d" x y z
+
+printfn "[] ist eine %s" (beschreibe [])
+printfn "[1] enthält %s" (beschreibe [1])
+printfn "[1; 2] enthält %s" (beschreibe [1; 2])
+printfn "[1; 2; 3; 4] %s" (beschreibe [1; 2; 3; 4])
+
+#!fsharp
+
+// Typische rekursive Handhabung einer Liste mit Pattern Matching
+// xs ist der typische Name für "mehrere X-e", mit Plural S
+let rec quicksort = function
+  | [] -> []
+  | x::xs ->
+      let smaller, larger = List.partition ((>=) x) xs
+      quicksort smaller @ [x] @ quicksort larger
+
+printfn "%A" (quicksort [3; 6; 8; 10; 1; 2; 1])
+
+#!markdown
+
+## Guards, Bedingungen für Matches
+
+#!fsharp
+
+let beschreibe x =
+  match x with
+  | x when x > 0 -> "positiv"
+  | x when x < 0 -> "negativ"
+  | _ -> "Null"
+
+printfn "5 ist %s" (beschreibe 5)
+printfn "-5 ist %s" (beschreibe -5)
+printfn "0 ist %s" (beschreibe 0)
+
+#!markdown
+
+## Option Types
+
+#!fsharp
+
+let beschreibe o =
+  match o with
+  | Some x -> sprintf "den Wert %d" x
+  | None -> "keinen Wert"
+
+printfn "Some 5 enthält %s" (beschreibe (Some 5))
+printfn "None enthält %s" (beschreibe None)
+
+#!markdown
+
+## Discriminated Unions
+
+#!fsharp
+
+type Shape =
+  | Circle of radius: float
+  | Rectangle of width: float * height: float
+
+let beschreibe s =
+  match s with
+  | Circle radius -> sprintf "Kreis mit Radius %f" radius
+  | Rectangle (width, height) -> sprintf "Rechteck mit Breite %f und Höhe %f" width height
+
+printfn "Kreis 5.0 ist ein %s" (beschreibe (Circle 5.0))
+printfn "Rechteck 3.0x4.0 ist ein %s" (beschreibe (Rectangle (3.0, 4.0)))
+
+#!markdown
+
+## Records
+
+#!fsharp
+
+type Person = { Name: string; Age: int }
+
+let beschreibe p =
+  match p with
+  | { Name = "Holger"; Age = 51 } -> "Holger, 51 Jahre"
+  | { Name = name; Age = age } -> sprintf "%s ist %d Jahre alt" name age
+
+printfn "Holger-Objekt: %s" (beschreibe { Name = "Holger"; Age = 51 })
+printfn "Oli-Objekt: %s" (beschreibe { Name = "Oli"; Age = 50 })
+
+#!markdown
+
+## Typ-Tests
+
+#!fsharp
+
+let beschreibe (x: obj) =
+  match x with
+  | :? int as i -> sprintf "int: %d" i
+  | :? string as s -> sprintf "string: %s" s
+  | _ -> "unbekannter Typ"
+
+printfn "42 ist ein %s" (beschreibe 42)
+printfn "\"Hallo\" ist ein %s" (beschreibe "Hallo")
+printfn "true ist ein %s" (beschreibe true)
+
+#!markdown
+
+## Active Patterns
+
+Sie können eigene Pattern-Erweiterungen bauen
+
+#!fsharp
+
+let (|Cool|Langweilig|) x =
+  if x = 42 then Cool else Langweilig
+
+let beschreibe x =
+  match x with
+  | Cool -> "coole Zahl"
+  | Langweilig -> "langweilige Zahl"
+
+printfn "42 ist eine %s" (beschreibe 42)
+printfn "17 ist eine %s" (beschreibe 17)
+
+#!fsharp
+
+let (|Cool|_|) x =
+  if x = 42 then Some Cool else None
+
+let (|Langweilig|_|) x =
+  if x = 17 then Some Langweilig else None
+
+let beschreibe x =
+  match x with
+  | Cool -> "coole Zahl"
+  | Langweilig -> "langweilige Zahl"
+  | _ -> "weder coole noch langweilige Zahl"
+
+printfn "42 ist eine %s" (beschreibe 42)
+printfn "17 ist eine %s" (beschreibe 17)
+printfn "5 ist eine %s" (beschreibe 5)

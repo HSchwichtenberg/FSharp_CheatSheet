@@ -51,5 +51,8 @@ try
     checkNumber 10
   with
     | ZahlMitTextException (zahl, text) -> printfn "Fehler für Zahl %d: %s" zahl text
+    | ex -> 
+      printfn "Unerwarteter Fehler: %A" ex
+      raise ex
 finally
   printfn "Jetzt aufräumen!"   
