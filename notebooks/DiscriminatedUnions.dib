@@ -1,0 +1,100 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!markdown
+
+# Discriminated Unions
+
+## Enums
+
+.NET-kompatible Enums stellen den einfachsten Fall der Discriminated Unions dar.
+
+#!fsharp
+
+// Dies ist ein Typ, der wie ein Enum aussieht, aber nicht so funktioniert
+type TwoValues = 
+  | FirstValue
+  | SecondValue
+
+// Der Name des Typs ist nicht notwendig, kann aber angegeben werden
+let val1 = FirstValue
+let val2 = TwoValues.SecondValue
+
+// Explizite Werte müssen angegeben werden, um einen "echten" Enum zu erstellen
+type TwoValueEnum = 
+  | FirstEnumValue = 1
+  | SecondEnumValue = 2
+
+// Mit Enums muss der Typ angegeben werden
+//let val3 = FirstEnumValue
+let val4 = TwoValueEnum.SecondEnumValue
+
+#!markdown
+
+## Unions können Werte enthalten
+
+#!fsharp
+
+// Die beiden möglichen Werte enthalten je einen Unterwert
+type Produkt = 
+  | EigenesProdukt of string
+  | LieferantenNummer of int
+
+let p1 = EigenesProdukt("Brot")
+let p2 = LieferantenNummer(53)
+
+type Anzahl = int
+
+// Hier sind die Unterwerte Tupel
+type LagerBuchung = 
+  | Eingehend of Produkt * Anzahl
+  | Ausgehend of Produkt * Anzahl
+
+// Nun können bereits recht komplexe Datenmodelle abgebildet werden
+let buchungen = 
+  [
+    Eingehend(EigenesProdukt("Gummihuhn"), 50);
+    Eingehend(LieferantenNummer(112), 18);
+    Eingehend(EigenesProdukt("Karabinerhaken"), 20);
+    Ausgehend(EigenesProdukt("Karabinerhaken"), 6);
+    Ausgehend(LieferantenNummer(37), 40);
+  ]
+
+// Die Verarbeitung der Buchungen kann mit Pattern Matching erfolgen
+// Hier wird der Bestand je Produkt berechnet
+let bestand = 
+  buchungen
+  |> List.fold (fun bestand -> function
+    | Eingehend(p, anzahl) -> 
+      let currentAmount = Map.tryFind p bestand |> Option.defaultValue 0
+      Map.add p (currentAmount + anzahl) bestand
+    | Ausgehend(p, anzahl) -> 
+      let currentAmount = Map.tryFind p bestand |> Option.defaultValue 0
+      Map.add p (currentAmount - anzahl) bestand
+  ) Map.empty
+  
+bestand |> Map.iter (fun p anzahl -> printfn "%A: %A" p anzahl)
+
+#!markdown
+
+## Generische Werte
+
+#!fsharp
+
+// Eine verkettete Liste mit einem generischen Wertetyp 'a
+// E steht für "Empty" (leer) oder "End" und L für "List"
+type 'a List = E | L of 'a * 'a List
+
+// Eine Liste von Zahlen
+let ints = L(10, L(12, L(15, E)))
+
+printfn "%A" ints 
+
+// Mit Pattern Matching kann diese Liste ähnlich wie eine
+// "normale" Liste verarbeitet werden
+let rec listSum = function
+    | E -> 0
+    | L(x, xs) -> x + (listSum xs)
+
+printfn "Summe: %d" (listSum ints)
