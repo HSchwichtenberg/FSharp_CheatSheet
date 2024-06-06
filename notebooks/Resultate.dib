@@ -1,0 +1,51 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Resultate
+
+Der Typ Result ist monadisch und dient der Kapselung von Operationen, die eventuell fehlschlagen. Dieser Weg sollte anstelle von Exceptions für Fehlerbehandlung genutzt werden.
+
+#!fsharp
+
+let div x y = 
+  if y = 0 then Error "Division by zero"
+  else Ok (x / y)
+
+printfn "%A" (div 10 2)
+printfn "%A" (div 10 0)
+
+// Auswerten von Ergebnissen
+let result = div 10 2
+match result with
+| Ok x -> printfn "Ergebnis: %d" x
+| Error msg -> printfn "Fehler: %s" msg
+
+#!markdown
+
+## Algorithmischer Umgang mit den monadischen Resultaten
+
+Methoden in Result arbeiten monadisch und dienen der Verkettung mehrerer Operationen. Siehe auch die Beispiele zu Optionen.
+
+#!fsharp
+
+let div x y = 
+  if y = 0 then Error "Division by zero"
+  else Ok (x / y)
+
+// Einige Funktionen, die mit einfachen ints arbeiten
+let square x = x * x
+let add x y = x + y
+
+// Die Kette wird zuende berechnet, solange kein Fehler auftritt.
+// Anderenfalls wird der Fehler zurückgegeben und die noch folgenden Funktionen nicht ausgeführt.
+let calcSequence x = 
+  div 20 x
+  |> Result.map square
+  |> Result.bind (fun x -> div x 2)
+  |> Result.map (add 5)
+
+printfn "%A" (calcSequence 4)
+printfn "%A" (calcSequence 0)

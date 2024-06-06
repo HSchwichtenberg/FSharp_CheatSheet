@@ -1,0 +1,94 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Optionen
+
+#!fsharp
+
+// Wenn ein Wert eventuell nicht vorhanden ist
+type IntOrNothing = int Option
+
+let x: IntOrNothing = Some 5
+let y: IntOrNothing = None
+
+printfn "%A" x
+printfn "%A" y
+
+// Den Wert verwenden, falls er vorhanden ist, sonst einen Standardwert
+let fallbackInt x = defaultArg x -999
+
+printfn "%A" (fallbackInt x)
+printfn "%A" (fallbackInt y)
+
+#!markdown
+
+## Defaultwerte in Konstruktoren und Methoden
+
+#!fsharp
+
+// ?optional: int ist ein optionaler Parameter
+// optional: Option<int> ist technisch dasselbe, aber mit ?optional kann der Wert 
+// vollständig ausgelassen werden
+type MyClass(notwendig: int, ?optional: int) = 
+    member this.Notwendig = notwendig
+    member this.Optional = defaultArg optional -999
+    // Auch Methoden können optionale Parameter haben
+    member x.MagicMult(?opt2: int) = (defaultArg opt2 x.Optional) * x.Optional
+
+type MyClass'(notwendig: int, optional: int Option) = 
+    member this.Notwendig = notwendig
+    member this.Optional = defaultArg optional -999
+
+// In beiden Fällen wird der Standardwert -999 verwendet
+let a = MyClass(5)
+let b = MyClass'(5, None)
+
+printfn "%d" (a.MagicMult())
+
+#!markdown
+
+## Algorithmischer Umgang mit den monadischen Optionen
+
+Methoden in Option arbeiten monadisch und dienen der Verkettung mehrerer Operationen. Siehe auch die Beispiele zu Resultaten.
+
+#!fsharp
+
+// Funktionen, die mit int arbeiten
+let square x = x * x
+let increment x = x + 1
+
+// Eine Funktion, die mit Option<int> arbeitet
+// Dazu muss der int für jeden Schritt extrahiert werden, falls er vorhanden ist,
+// und das Ergebnis wieder in ein Option<int> verpackt werden
+let calcSequence (oi: int Option) = 
+  oi
+  |> Option.map increment
+  |> Option.map square
+
+printfn "%A" (calcSequence (Some 5))
+printfn "%A" (calcSequence None)  
+
+#!fsharp
+
+// Funktionen, die int zurückgeben
+let mult x y = x * y
+let sqrt x = int(System.Math.Sqrt(float x))
+
+// Funktion, die Option<int> zurückgibt
+let lookup i = 
+  if i = 42 then Some (42 * 42)
+  else None
+
+
+let calcSequence (oi: int option) =
+  oi
+  |> Option.map (mult 7)
+  |> Option.bind lookup
+  |> Option.map sqrt
+
+printfn "%A" (calcSequence (Some 5))
+printfn "%A" (calcSequence (Some 6))
+printfn "%A" (calcSequence None)
