@@ -1,0 +1,53 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Computation Expressions
+
+Eine vereinheitlichte Syntax für kontextbehaftete Berechnungen in F#, wie etwa Monaden oder Funktoren in anderen Sprachen.
+
+#!markdown
+
+## seq - Sequenzen
+
+#!fsharp
+
+// Werte algorithmisch erzeugen
+let oddNumbers cutoff = 
+  seq {
+    for i in 1..cutoff do
+      if i % 2 <> 0 then
+        yield i
+  }
+
+// Explizite Werte
+let variousNumbers = 
+  seq {
+    17
+    25
+    42
+  }
+
+// Sequenzen kombinieren, auch mit expliziten Werten
+let combine x y = 
+  seq {
+    yield! x
+    101
+    yield! y
+  }
+
+printfn "%A" (oddNumbers 10 |> Seq.toList)
+
+printfn "%A" (combine (oddNumbers 10) variousNumbers |> Seq.toList)
+
+// Rekursive Sequenz
+let rec endless x = 
+  seq {
+    yield x
+    yield! (endless x)
+  }
+
+// Besser nur die ersten 10 Elemente ausgeben
+printfn "%A" (endless 42 |> Seq.take 10 |> Seq.toList)
