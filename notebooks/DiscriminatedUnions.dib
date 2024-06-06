@@ -102,3 +102,26 @@ let rec listSum = function
     | L(x, xs) -> x + (listSum xs)
 
 printfn "Summe: %d" (listSum ints)
+
+#!markdown
+
+## Unions mit Methoden und Properties
+
+#!fsharp
+
+type Shape = 
+  | Circle of float
+  | Rectangle of float * float
+  member x.GetArea() = 
+    match x with
+    | Circle(r) -> Math.PI * r * r
+    | Rectangle(w, h) -> w * h
+  member x.Area = x.GetArea()
+
+let shapes = 
+  [
+    Circle(5.0);
+    Rectangle(3.0, 4.0);
+  ]
+
+shapes |> List.iter (fun s -> printfn "Fläche: %f" s.Area)
