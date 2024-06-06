@@ -43,6 +43,8 @@ printfn "Area of %A: %f" r3 (r3.GetArea())
 
 ## Veränderbare Properties
 
+Bitte mit Vorsicht verwenden! Die Erwartung eines anderen Programmierers ist, dass Records nicht verändert werden können.
+
 #!fsharp
 
 type Rectangle = 
