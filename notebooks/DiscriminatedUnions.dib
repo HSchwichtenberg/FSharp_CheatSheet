@@ -30,6 +30,9 @@ type TwoValueEnum =
 //let val3 = FirstEnumValue
 let val4 = TwoValueEnum.SecondEnumValue
 
+// Enum aus Zahl erzeugen
+printfn "%A" (enum<TwoValueEnum>(2))
+
 #!markdown
 
 ## Unions können Werte enthalten
@@ -57,6 +60,7 @@ let buchungen =
     Eingehend(EigenesProdukt("Gummihuhn"), 50);
     Eingehend(LieferantenNummer(112), 18);
     Eingehend(EigenesProdukt("Karabinerhaken"), 20);
+    Eingehend(LieferantenNummer(37), 100);
     Ausgehend(EigenesProdukt("Karabinerhaken"), 6);
     Ausgehend(LieferantenNummer(37), 40);
   ]
@@ -73,7 +77,7 @@ let bestand =
       let currentAmount = Map.tryFind p bestand |> Option.defaultValue 0
       Map.add p (currentAmount - anzahl) bestand
   ) Map.empty
-  
+
 bestand |> Map.iter (fun p anzahl -> printfn "%A: %A" p anzahl)
 
 #!markdown
