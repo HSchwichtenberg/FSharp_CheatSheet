@@ -1,0 +1,58 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!markdown
+
+# Generische Typvariablen
+
+#!fsharp
+
+// Automatische Generalisierung - Signatur ist hier
+// x: 'a -> unit
+// 'a ist eine Typvariable, kann auch 'T oder gar 'MeinTyp
+let output x = printfn "%A" x
+
+// Diese Variante ist explizit in gleicher Weise typisiert
+let output' (x: 'a) = printfn "%A" x
+
+// Bei Typen mit generischen Variablen kann die Variable in spitzen Klammern oder vorweg angegeben werden
+type MyList<'a> = List<'a>
+type 'a MyList2 = List<'a>
+type 'a MyList3 = 'a list
+
+// Generische Variablen dürfen beschränkt werden
+type MyList4<'a when 'a :> System.IComparable> = List<'a>
+// Diese Liste arbeitet nur mit Typen, die addiert werden können
+type MyList5<'a when 'a : (static member (+) : 'a * 'a -> 'a)> = List<'a>
+
+let strlist1 : MyList4<string> = ["a"; "b"]
+let strlist2 : MyList5<string> = ["a"; "b"]
+// Fehler: bool kann nicht mit + addiert werden
+// let blist = MyList5<bool> = [true; false]
+
+#!markdown
+
+## Typen mit generischen Parametern
+
+#!fsharp
+
+type 'a GenericRecord = { Id: int; Value: 'a }
+
+type GenericRecord'<'T> = { Id: int; Value: 'T }
+
+type 'a GenericUnion =
+    | Value of 'a
+    | Error of string
+
+type GenericUnion'<'T> =
+    | Value of 'T
+    | Error of string
+
+type ('a, 'b) GenericClass(valueA: 'a, valueB: 'b) =
+    member this.ValueA = valueA
+    member this.ValueB = valueB
+
+type GenericClass'<'T, 'U>(valueA: 'T, valueB: 'U) =
+    member this.ValueA = valueA
+    member this.ValueB = valueB

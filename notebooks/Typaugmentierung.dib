@@ -1,0 +1,28 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Typaugmentierung
+
+F# erlaubt, Typen nachträglich mit neuen Elementen zu erweitern. Die Reihenfolge der Auswertung ist dabei maßgeblich.
+
+#!fsharp
+
+// Der hier verwendete Typ ist ein Record, aber Typaugmentierung funktioniert auch mit anderen Typen
+type Rectangle = 
+  { Width: float; Height: float }
+
+let r1 = { Width = 10.0; Height = 20.0 }
+
+// An diesem Punkt existiert die Methode GetArea noch nicht
+//printfn "Area of %A: %f" r1 (r1.GetArea())
+
+// Hier wird die Methode GetArea nachträglich hinzugefügt.
+// Dies kann auch in einer anderen Datei geschehen.
+type Rectangle with
+  member x.GetArea() = x.Width * x.Height
+
+// Jetzt kann die Methode aufgerufen werden
+printfn "Area of %A: %f" r1 (r1.GetArea())
