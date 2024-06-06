@@ -1,0 +1,54 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Records
+
+#!fsharp
+
+// Records sind meistens unveränderlich und werden als Listen von Feldern definiert
+type Rectangle = 
+  { Width: float; Height: float }
+
+// Solange keine Kollision auftritt, wird der Typ eines Records automatisch erkannt.
+// Alle Felder müssen initialisiert werden.
+let r1 = { Width = 10.0; Height = 20.0 }
+
+// Zur Erzeugung von neuen Varianten der Record-Instanz wird die with-Syntax verwendet
+let r2 = { r1 with Width = 30.0 }
+
+#!markdown
+
+## Methoden und Properties
+
+#!fsharp
+
+type Rectangle = 
+  { Width: float; Height: float }
+  static member CreateSquare side = { Width = side; Height = side }
+  member x.GrowWidth dx = { x with Width = x.Width + dx }
+  member x.GrowHeight dy = { x with Height = x.Height + dy }
+  member x.Zoom factor = { x with Width = x.Width * factor; Height = x.Height * factor }
+  member x.GetArea() = x.Width * x.Height
+  member x.Area with get() = x.Width * x.Height
+
+let r = Rectangle.CreateSquare 10.0
+let r2 = r.GrowWidth 5.0
+let r3 = r2.Zoom 1.5
+printfn "Area of %A: %f" r3 (r3.GetArea())
+
+#!markdown
+
+## Veränderbare Properties
+
+#!fsharp
+
+type Rectangle = 
+  { mutable Width: float; mutable Height: float }
+  member x.Area with get() = x.Width * x.Height
+
+let r = { Width = 10.0; Height = 20.0 }
+r.Width <- 30.0
+printfn "Area of %A: %f" r (r.Area)
