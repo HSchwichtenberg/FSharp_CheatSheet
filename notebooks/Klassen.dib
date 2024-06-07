@@ -1,0 +1,111 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"fsharp","items":[{"aliases":[],"languageName":"fsharp","name":"fsharp"}]}}
+
+#!markdown
+
+# Klassen
+
+#!fsharp
+
+type AutoTyp =
+  | Dreirad = 0 
+  | NormalerVierRadler = 1
+  | Lastenfahrzeug = 2 
+  | EchtGrosserLastwagen = 3 
+  | MythischesMonster = 4
+  | KomischesTeil = 5
+
+// Die Parameter in der Deklaration werden als Konstruktorparameter verwendet.
+// Werte sind als read-only Felder verfügbar.
+// Die Reihenfolge der Blöcke in der Klassendeklaration ist wichtig.
+type Auto(farbe: string, anzahlRaeder: int) =
+  // Der do-Block wird ausgeführt, wenn eine Instanz erstellt wird.
+  do 
+    if anzahlRaeder < 3 then failwith "Autos sollten mindestens drei Räder haben"
+    if anzahlRaeder > 99 then failwith "Das ist ja albern"
+
+  // let-Bindungen sind private Felder.
+  let autoTyp = 
+    match anzahlRaeder with
+    | 3 -> AutoTyp.Dreirad
+    | 4 -> AutoTyp.NormalerVierRadler
+    | 6 -> AutoTyp.Lastenfahrzeug
+    | x when x % 2 = 1 -> AutoTyp.KomischesTeil
+    | _ -> AutoTyp.MythischesMonster
+
+  // Solche Felder können auch mutable sein
+  let mutable anzahlPassagiere = 0
+
+  // Weitere Konstruktoren können mit dem new-Keyword definiert werden.
+  new() = Auto("rot", 4)
+
+  // Bewegen ist eine Instanzmethode. Das x ist die Referenz auf das aktuelle Objekt,
+  // wie 'this' in C#. Sie können diese Referenz frei benennen.
+  member x.Bewegen() = printfn "Das Auto (%s) fährt" farbe
+
+  // Eigenschaften werden so automatisch mit get implementiert
+  member x.AutoTyp = autoTyp
+  member x.Farbe = farbe
+
+  // Diese Eigenschaft kann in abgeleiteten Klassen überschrieben werden.
+  abstract AnzahlPassagiere: int with get, set
+  default x.AnzahlPassagiere with get() = anzahlPassagiere 
+                             and set v = anzahlPassagiere <- v
+  
+// Abgeleitete Klasse  
+type RoterRiese() = 
+  inherit Auto("rot", 18)
+
+  // Mit überschriebener Eigenschaft
+  override x.AnzahlPassagiere
+    with set v = 
+      if v > 2 then failwith "Nur zwei Passagiere erlaubt" else base.AnzahlPassagiere <- v
+
+// Instanzen erstellen
+let gruenesAuto = Auto("grün", 4)
+gruenesAuto.Bewegen()
+
+printfn "Grünes Auto ist ein %A" gruenesAuto.AutoTyp
+
+let standardAuto = Auto()
+standardAuto.Bewegen()
+
+printfn "%d Passagiere im Standard-Auto" standardAuto.AnzahlPassagiere
+standardAuto.AnzahlPassagiere <- 2
+printfn "%d Passagiere im Standard-Auto" standardAuto.AnzahlPassagiere
+
+let roterRiese = RoterRiese()
+roterRiese.AnzahlPassagiere <- 2
+printfn "%d Passagiere im roten Riesen" roterRiese.AnzahlPassagiere
+roterRiese.AnzahlPassagiere <- 4 // Fehler
+
+#!markdown
+
+## Statische Felder, Mitglieder, und Konstruktor mit Instanzreferenz
+
+#!fsharp
+
+type Person(vorname: string, name: string) as self =
+  // Private statische Felder
+  static let mutable instanzZaehler = 0
+  static let mutable alleInstanzen = ResizeArray<Person>()
+
+  // Privates Instanzfeld
+  let mutable id = 0
+
+  // Konstruktor
+  do
+    instanzZaehler <- instanzZaehler + 1
+    id <- instanzZaehler
+    alleInstanzen.Add(self) // erfordert "as self" in der Klassendefinition
+      
+  // Öffentliche statisches Mitglied
+  static member AlleInstanzen = alleInstanzen
+
+  override x.ToString() = sprintf "%s %s (%d)" vorname name id
+
+let person1 = Person("Holger", "Schwichtenberg")
+let person2 = Person("Oli", "Sturm")
+
+printfn "Alle Instanzen: %A" Person.AlleInstanzen
