@@ -32,7 +32,7 @@ Methoden in Result arbeiten monadisch und dienen der Verkettung mehrerer Operati
 #!fsharp
 
 let div x y = 
-  if y = 0 then Error "Division by zero"
+  if y = 0 then Error "Division durch Null"
   else Ok (x / y)
 
 // Einige Funktionen, die mit einfachen ints arbeiten
