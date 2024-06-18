@@ -1,0 +1,75 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!markdown
+
+# Schleifen
+
+#!fsharp
+
+printfn "for...do-Schleife vorwärts"
+for i in 1 .. 10 do
+  printf "%d " i
+
+printfn "\n\nfor...do-Schleife rückwärts"
+for i in 10 .. -1 .. 1 do
+  printf "%d " i
+
+printfn "\n\nfor..in-Schleife über die Elemente eines Arrays"
+let array = [| 1; 2; 3 |]
+for x in array do
+  printf "%d " x
+  
+printfn "\n\nfor..in-Schleife über ein Dictionary"
+let objektMitWerten = dict ["a", 1; "b", 2; "c", 3]
+for KeyValue(k, v) in objektMitWerten do
+  printfn "Schlüssel %s = Wert %d" k v
+  
+printfn "\nwhile-Schleife (kein do...while, kein break)"
+let mutable i = 1
+while i <= 10 do
+  printf "%d " i
+  i <- i + 1
+
+printfn "\n\nRekursive Alternative zur while-Schleife mit Abbruchbedingung"
+let rec loop i =
+  // Willkürliche Abbruchbedingung, ähnlich wie break
+  if i = 5 then ()
+
+  elif i <= 10 then
+    printf "%d " i
+    loop (i + 1)
+loop 1
+
+printfn "\n\nRekursive Schleife äquilavent zu do...while"
+let rec loopDoWhile i =
+  printf "%d " i
+  if i <= 10 then // absichtlich <=, um die Äquivalenz zu do...while zu demonstrieren
+    loopDoWhile (i + 1)
+loopDoWhile 1
+
+#!markdown
+
+## Rekursive Alternativen zu Schleifen
+
+Der traditionell typische Ansatz in funktionalen Sprachen. Der F#-Kompiler kann die Rekursion optimieren, so dass sie nicht zu einem Stack-Overflow führt.
+
+#!fsharp
+
+printfn "Rekursive Alternative zur while-Schleife mit Abbruchbedingung"
+let rec loop i =
+  // Willkürliche Abbruchbedingung, ähnlich wie break
+  if i = 5 then ()
+
+  elif i <= 10 then
+    printf "%d " i
+    loop (i + 1)
+loop 1
+
+printfn "\n\nRekursive Schleife äquilavent zu do...while"
+let rec loopDoWhile i =
+  printf "%d " i
+  if i <= 10 then // absichtlich <=, um die Äquivalenz zu do...while zu demonstrieren
+    loopDoWhile (i + 1)
+loopDoWhile 1
