@@ -216,6 +216,11 @@ let add5List = List.map add5
 
 printfn "%A" (add5List values)
 
+// printfn mit mehreren Platzhaltern kann auch "teilweise angewendet" werden
+let printTwoPart = printfn "%s: %A" 
+let printResult = printTwoPart "Ergebnis"
+printResult (List.map square values)
+
 #!markdown
 
 ## Pipelines und Komposition
