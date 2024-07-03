@@ -6,7 +6,7 @@
 
 # Exceptions
 
-Hauptsächlich für die Interaktion mit .NET-APIs verwendet.
+Exceptions werden hauptsächlich für die Interaktion mit .NET-APIs verwendet.
 
 #!fsharp
 
