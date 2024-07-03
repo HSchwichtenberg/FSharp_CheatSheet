@@ -67,7 +67,7 @@ let rec loop i =
     loop (i + 1)
 loop 1
 
-printfn "\n\nRekursive Schleife äquilavent zu do...while"
+printfn "\n\nRekursive Schleife - äquivalent zu do...while"
 let rec loopDoWhile i =
   printf "%d " i
   if i <= 10 then // absichtlich <=, um die Äquivalenz zu do...while zu demonstrieren
