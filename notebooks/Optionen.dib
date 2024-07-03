@@ -11,17 +11,17 @@
 // Wenn ein Wert eventuell nicht vorhanden ist
 type IntOrNothing = int Option
 
-let x: IntOrNothing = Some 5
+let x: IntOrNothing = Some 42
 let y: IntOrNothing = None
 
-printfn "%A" x
-printfn "%A" y
+printfn "%A" x // Some 42
+printfn "%A" y // None
 
 // Den Wert verwenden, falls er vorhanden ist, sonst einen Standardwert
 let fallbackInt x = defaultArg x -999
 
-printfn "%A" (fallbackInt x)
-printfn "%A" (fallbackInt y)
+printfn "%A" (fallbackInt x) // 42
+printfn "%A" (fallbackInt y) // -999
 
 #!markdown
 
@@ -46,7 +46,7 @@ type MyClass'(notwendig: int, optional: int Option) =
 let a = MyClass(5)
 let b = MyClass'(5, None)
 
-printfn "%d" (a.MagicMult())
+printfn "%d" (a.MagicMult()) // 998001
 
 #!markdown
 
@@ -68,8 +68,8 @@ let calcSequence (oi: int Option) =
   |> Option.map increment
   |> Option.map square
 
-printfn "%A" (calcSequence (Some 5))
-printfn "%A" (calcSequence None)  
+printfn "%A" (calcSequence (Some 5)) // Some 36
+printfn "%A" (calcSequence None)  // None
 
 #!fsharp
 
@@ -82,13 +82,12 @@ let lookup i =
   if i = 42 then Some (42 * 42)
   else None
 
-
 let calcSequence (oi: int option) =
   oi
   |> Option.map (mult 7)
   |> Option.bind lookup
   |> Option.map sqrt
 
-printfn "%A" (calcSequence (Some 5))
-printfn "%A" (calcSequence (Some 6))
-printfn "%A" (calcSequence None)
+printfn "%A" (calcSequence (Some 5)) // None
+printfn "%A" (calcSequence (Some 6)) // Some 42
+printfn "%A" (calcSequence None) // None

@@ -57,7 +57,7 @@ type Auto(farbe: string, anzahlRaeder: int) =
 type RoterRiese() = 
   inherit Auto("rot", 18)
 
-  // Mit überschriebener Eigenschaft
+  // Überschriebene Eigenschaft
   override x.AnzahlPassagiere
     with set v = 
       if v > 2 then failwith "Nur zwei Passagiere erlaubt" else base.AnzahlPassagiere <- v
