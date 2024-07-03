@@ -124,4 +124,4 @@ let shapes =
     Rectangle(3.0, 4.0);
   ]
 
-shapes |> List.iter (fun s -> printfn "Fläche: %f" s.Area)
+shapes |> List.iter (fun s -> printfn "Fläche: %.2f" s.Area)
