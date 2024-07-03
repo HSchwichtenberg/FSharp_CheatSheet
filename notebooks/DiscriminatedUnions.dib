@@ -31,7 +31,7 @@ type TwoValueEnum =
 let val4 = TwoValueEnum.SecondEnumValue
 
 // Enum aus Zahl erzeugen
-printfn "%A" (enum<TwoValueEnum>(2))
+printfn "%A" (enum<TwoValueEnum>(2)) // SecondEnumValue
 
 #!markdown
 
@@ -91,9 +91,9 @@ bestand |> Map.iter (fun p anzahl -> printfn "%A: %A" p anzahl)
 type 'a List = E | L of 'a * 'a List
 
 // Eine Liste von Zahlen
-let ints = L(10, L(12, L(15, E)))
+let ints = L(10, L(12, L(20, E)))
 
-printfn "%A" ints 
+printfn "%A" ints // L (10, L (12, L (20, E)))
 
 // Mit Pattern Matching kann diese Liste ähnlich wie eine
 // "normale" Liste verarbeitet werden
@@ -101,7 +101,7 @@ let rec listSum = function
     | E -> 0
     | L(x, xs) -> x + (listSum xs)
 
-printfn "Summe: %d" (listSum ints)
+printfn "Summe: %d" (listSum ints) // Summe: 42
 
 #!markdown
 
