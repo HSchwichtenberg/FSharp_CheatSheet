@@ -13,7 +13,7 @@ Exceptions werden hauptsächlich für die Interaktion mit .NET-APIs verwendet.
 let exceptionWerfen : unit =
   failwith "Das ging schief!"
 
-exceptionWerfen
+exceptionWerfen // Error: System.Exception: Das ging schief!
 
 #!fsharp
 
