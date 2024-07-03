@@ -44,11 +44,11 @@ let checkNumber x =
   else
     printfn "Alles gut mit %d" x
 
-checkNumber 3
+checkNumber 3 // Alles gut mit 3
 
 try
   try
-    checkNumber 10
+    checkNumber 10 // Fehler für Zahl 10: Zahl ist zu gross
   with
     | ZahlMitTextException (zahl, text) -> printfn "Fehler für Zahl %d: %s" zahl text
     | ex -> 
