@@ -34,10 +34,10 @@ greet "Holger"
 
 #!fsharp
 
- let info name alter wohnort = 
-    printfn "%s ist %d Jahre alt und wohnt in %s" name alter wohnort
+ let info name alter wohnort = // Funktion mit 3 Parametern
+    printfn "%s ist %d Jahre alt und wohnt in %s." name alter wohnort
  
- info "Holger" 51 "Essen"
+ info "Holger" 51 "Essen" // Holger ist 51 Jahre alt und wohnt in Essen.
 
 #!markdown
 
@@ -58,7 +58,7 @@ Viele C#-Programmierer nehmen hier fälschlich an, dass diese Funktion mehrere P
 
 #!fsharp
 
- let info (name:string, alter:int) = 
+ let info (name:string, alter:int) = // Funktion mit Tupel als Parameter
     printfn "%s ist %d Jahre alt." name alter
  
  info ("Holger", 51)
@@ -69,7 +69,7 @@ Viele C#-Programmierer nehmen hier fälschlich an, dass diese Funktion mehrere P
 
 #!fsharp
 
- let info (name:string) (alter:int) = 
+ let info (name:string) (alter:int) = // Funktion mit 2 Parametern
     printfn "%s ist %d Jahre alt." name alter
  
  info "Holger" 51
@@ -85,12 +85,12 @@ Viele C#-Programmierer nehmen hier fälschlich an, dass diese Funktion mehrere P
    r + "." // letzter Ausdruck ist der Rückgabewert
 
  let text = infoString "Holger" 51
- printfn "%s" text
+ printfn "%s" text // Holger ist 51 Jahre alt.
 
  // Oder kürzer:
- let infoString2 name alter = sprintf "%s ist %d Jahre alt" name alter
+ let infoString2 name alter = sprintf "%s ist %d Jahre alt." name alter
 
- printfn "%s" (infoString2 "Holger" 51)
+ printfn "%s" (infoString2 "Holger" 51) // Holger ist 51 Jahre alt.
 
 #!markdown
 
@@ -107,10 +107,10 @@ let square10plus5 = square (10 + 5)
 
 let add x y = x + y
 
-// Zum Vergleich, C#: add(10 + 3, 30 - 1)
-add (10 + 3) (30 - 1)
+add (10 + 3) (30 - 1) // Zum Vergleich in C#: add(10 + 3, 30 - 1)
+
 // Bei Bedarf Klammern schachteln
-printfn "%d" (add (10 + 3) (30 - 1))
+printfn "%d" (add (10 + 3) (30 - 1)) // 42
 
 #!markdown
 
@@ -124,7 +124,7 @@ let add x y = x + y
 
 // Durch diese Verwendung werden die Typen der Parameter
 // als float festgelegt. 
-printfn "%e" (add 12.4 13.6)
+printfn "%e" (add 12.4 13.6) // 2.600000e+001
 
 #!markdown
 
@@ -137,7 +137,7 @@ let rec factorial x =
   | 0 -> 1
   | _ -> factorial (x - 1) * x
 
-printfn "%d" (factorial 5)
+printfn "%d" (factorial 5) // 120
 
 #!markdown
 
@@ -158,7 +158,7 @@ and pong c v =
     | 0 -> v
     | _ -> ping (c - 1) (v + c)
 
-printfn $"Ping/pong result: %d{ping 20 0}"
+printfn $"Ping-Pong-Ergebnis: %d{ping 20 0}" // Ping-Pong-Ergebnis: 210
 
 #!markdown
 
@@ -172,7 +172,7 @@ let rec factorial = function
   | 0 -> 1
   | x -> factorial (x - 1) * x
 
-printfn "%d" (factorial 5)
+printfn "%d" (factorial 5) // 120
 
 #!markdown
 
@@ -186,10 +186,10 @@ let rec map f = function
 
 let square x = x * x
 let values = [10; 20; 30]
-printfn $"Quadratzahlen: %A{map square values}"
+printfn $"Quadratzahlen: %A{map square values}" // Quadratzahlen: [100; 400; 900]
 
 // Ad-hoc mit Lambda-Ausdruck
-printfn $"Doppelte Werte: %A{map (fun x -> x * 2) values}"
+printfn $"Doppelte Werte: %A{map (fun x -> x * 2) values}" // Doppelte Werte: [20; 40; 60]
 
 #!markdown
 
@@ -202,24 +202,24 @@ let add x y = x + y
 // Spezielle Variante addiert immer 5
 let add5 = add 5
 
-printfn "%d" (add 10 20)
-printfn "%d" (add5 25)
+printfn "%d" (add 22 20) // 42
+printfn "%d" (add5 37) // 42
 
 let square x = x * x
 let values = [10; 20; 30]
 
 // Allgemeine map-Funktion ruft Funktion für jedes Element einer Liste auf
-printfn "%A" (List.map square values)
+printfn "%A" (List.map square values) // [100; 400; 900]
 
 // Besondere map-Funktion addiert 5 zu jedem Listenelement
 let add5List = List.map add5
 
-printfn "%A" (add5List values)
+printfn "%A" (add5List values) // [15; 25; 35]
 
 // printfn mit mehreren Platzhaltern kann auch "teilweise angewendet" werden
 let printTwoPart = printfn "%s: %A" 
 let printResult = printTwoPart "Ergebnis"
-printResult (List.map square values)
+printResult (List.map square values) // Ergebnis: [100; 400; 900]
 
 #!markdown
 
@@ -231,13 +231,13 @@ let add5 x = x + 5
 let square x = x * x
 
 // Aufrufe können geschachtelt werden
-printfn "%d" (square (add5 17))
+printfn "%d" (square (add5 17)) // 484
 // Pipelines ermöglichen eine natürliche Reihenfolge der Funktionsaufrufe
-printfn "%d" (add5 17 |> square)
+printfn "%d" (add5 17 |> square) // 484
 
 // Komposition -- wenn die Schritte einer Pipeline wiederverwendet werden sollen
 let add5ThenSquare = add5 >> square
-printfn "%d" (add5ThenSquare 17)
+printfn "%d" (add5ThenSquare 17) // 484
 
 #!markdown
 
@@ -250,12 +250,12 @@ let div x y = x / y
 // Diese Funktion flip kann Parameter einer Funktion vertauschen
 let flip f x y = f y x
 
-printfn "10 / 5 = %e" (div 10.0 5.0)
-printfn "5 / 10 = %e" ((flip div) 10.0 5.0)
+printfn "10 / 5 = %e" (div 10.0 5.0) // 2.000000e+000
+printfn "5 / 10 = %e" ((flip div) 10.0 5.0) // 5.000000e-001
 
 // Auch der Operator / kann wie div verwendet werden
-printfn "10 / 5 = %e" ((/) 10.0 5.0)
-printfn "5 / 10 = %e" ((flip (/)) 10.0 5.0)
+printfn "10 / 5 = %e" ((/) 10.0 5.0) // 2.000000e+000
+printfn "5 / 10 = %e" ((flip (/)) 10.0 5.0) // 5.000000e-001
 
 // Statt flip einen eigenen Operator erzeugen
 let (><) = flip
@@ -263,7 +263,7 @@ let (><) = flip
 // Nun kann Partial Application von der rechten Seite erfolgen
 let durch5 = (/) >< 5.0
 
-printfn "10 / 5 = %e" (durch5 10.0)
+printfn "10 / 5 = %e" (durch5 10.0) // 2.000000e+000
 
 #!markdown
 
@@ -286,6 +286,6 @@ let values = ["Oli"; "Holger"; "C#"; "F#" ]
 
 let enthalten = fastLookup values
 
-printfn "Holger: %b" (enthalten "Holger")
-printfn "F#: %b" (enthalten "F#")
-printfn "Visual Basic: %b" (enthalten "Visual Basic")
+printfn "Holger: %b" (enthalten "Holger") // Holger: true
+printfn "F#: %b" (enthalten "F#") // F#: true
+printfn "Visual Basic: %b" (enthalten "Visual Basic") // Visual Basic: false
