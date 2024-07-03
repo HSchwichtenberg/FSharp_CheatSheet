@@ -15,7 +15,7 @@
  let output = 
    printfn "Hallo, Welt!"
  
- output
+ output // Hallo, Welt!
 
 #!markdown
 
@@ -26,7 +26,7 @@
 let greet name = 
    printfn "Hallo, %s!" name
  
-greet "Holger"
+greet "Holger" // Hallo, Holger!
 
 #!markdown
 
@@ -48,7 +48,7 @@ greet "Holger"
 let greet (name:string) = 
    printfn "Hallo, %s!" name
    
-greet "Holger"
+greet "Holger" // Hallo, Holger!
 
 #!markdown
 
@@ -61,7 +61,7 @@ Viele C#-Programmierer nehmen hier fälschlich an, dass diese Funktion mehrere P
  let info (name:string, alter:int) = // Funktion mit Tupel als Parameter
     printfn "%s ist %d Jahre alt." name alter
  
- info ("Holger", 51)
+ info ("Holger", 51) // Holger ist 51 Jahre alt.
 
 #!markdown
 
@@ -72,7 +72,7 @@ Viele C#-Programmierer nehmen hier fälschlich an, dass diese Funktion mehrere P
  let info (name:string) (alter:int) = // Funktion mit 2 Parametern
     printfn "%s ist %d Jahre alt." name alter
  
- info "Holger" 51
+ info "Holger" 51 // Holger ist 51 Jahre alt.
 
 #!markdown
 
