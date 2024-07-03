@@ -19,7 +19,6 @@ let outerFunction() =
 
 outerFunction()
 
-
 // Alternativ kann 'using' präzise Blöcke definieren
 let outerFunction'() = 
   using (createDisposable 
