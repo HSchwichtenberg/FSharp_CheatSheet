@@ -8,9 +8,9 @@
 
 #!markdown
 
-## Typherleitung
+## Variablen
 
-Zeigen Sie mit der Maus auf einen Wert, um den hergeleiteten Typ zu sehen. Typen werden in F# nur selten explizit angegeben.
+In F# verwendet man in der Regel Typherleitung. Zeigen Sie mit der Maus auf einen Wert, um den hergeleiteten Typ zu sehen.
 
 #!fsharp
 
@@ -19,7 +19,16 @@ let b = "Oliver Sturm" // string
 
 #!markdown
 
-## Werte und Variablen
+Typen werden in F# nur selten explizit angegeben. Es ist aber natürlich möglich:
+
+#!fsharp
+
+let a : int = 42;
+let b : string = "Oliver Sturm";
+
+#!markdown
+
+Variablen sind im Standard unveränderlich. Erst mit dem Zusatz mutable kann man sie ändern.
 
 #!fsharp
 
