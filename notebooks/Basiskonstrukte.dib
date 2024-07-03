@@ -92,6 +92,9 @@ und
  printfn "für Bildschirmausgaben" // Ausgabe mit Umbruch
 
  printfn "Ganzzahl: %d" zahl // Ganzzahl: 42
+ printfn "Kommazahl: %f" gebrocheneZahl // Kommazahl: 42.50000
+ printfn "Kommazahl: %8.4f" gebrocheneZahl // Kommazahl: 42.5000
+ printfn "Kommazahl: %08.4f" gebrocheneZahl // Kommazahl: 042.5000
  printfn "Hexadezimalzahl: %x" zahl // Hexadezimalzahl: 2a
  printfn "Oktalzahl: %o" zahl // Oktalzahl: 52
  printfn "Binärzahl: %B" zahl // Binärzahl: 101010
