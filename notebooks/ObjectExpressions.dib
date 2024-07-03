@@ -14,8 +14,8 @@ Objektausdrücke können Objekte erzeugen, ohne dass zuvor formal eine Klasse de
 
 let halloObject = { new obj() with member x.ToString() = "Hallo!" }
 
-printfn "%A" halloObject 
-printfn "%s" (halloObject.GetType().FullName)
+printfn "%A" halloObject // Hallo! 
+printfn "%s" (halloObject.GetType().FullName) // FSI_0011+halloObject@1-1
 
 #!markdown
 
@@ -31,12 +31,12 @@ let adhocDeepThought = {
     new IDeepThought with 
         member x.TheAnswer = 42
         member x.AnswerString() = 
-          sprintf "Die Antwort ist %d" x.TheAnswer
+          sprintf "Die Antwort ist %d!" x.TheAnswer
     }
 
 // Nun existiert ein Object, dass das Interface implementiert, mit dem 
 // wir über die Interface-Referenz interagieren können.
-printfn "%s" (adhocDeepThought.AnswerString())
+printfn "%s" (adhocDeepThought.AnswerString()) // Die Antwort ist 42!
 
 #!markdown
 
@@ -52,7 +52,7 @@ type IDeepThought =
 type DeepThought() = 
     interface IDeepThought with
         member x.TheAnswer = 42
-        member x.AnswerString() = sprintf "Die Antwort ist %d" (x :> IDeepThought).TheAnswer
+        member x.AnswerString() = sprintf "Die Antwort ist %d!" (x :> IDeepThought).TheAnswer
 
 // Dies ist ein Objekt, das den Typ DeepThought kapselt,
 // aber seine eigene Interface-Implementation hat, die
@@ -63,7 +63,7 @@ let htmlDeepThought =
         member x.TheAnswer = deepThought.TheAnswer
         member x.AnswerString() = sprintf "<b>%s</b>" (deepThought.AnswerString()) }
 
-printfn "%A" (htmlDeepThought.AnswerString())
+printfn "%A" (htmlDeepThought.AnswerString()) // "<b>Die Antwort ist 42!</b>"
 
 #!markdown
 
@@ -79,5 +79,5 @@ let puppetDeepThought answer =
         member x.AnswerString() = sprintf "Hm... wie wär's mit %d?" x.TheAnswer }
 
 let pdt = puppetDeepThought 35
-printfn "%A" pdt.TheAnswer
-printfn "%A" (pdt.AnswerString())
+printfn "%A" pdt.TheAnswer // 35
+printfn "%A" (pdt.AnswerString()) // "Hm... wie wär's mit 35?"
