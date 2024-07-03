@@ -17,7 +17,7 @@ let nextNumber s =
   | "zwei" -> "drei"
   | _ -> failwith "Nach drei geht's hier nicht weiter"
 
-printfn $"""Nach eins kommt %s{nextNumber "eins"}"""
+printfn $"""Nach eins kommt %s{nextNumber "eins"}""" // Nach eins kommt zwei
 
 // Match mit mehreren Elementen und Platzhaltern
 type PointDescription =
@@ -33,10 +33,10 @@ let describePoint x y =
   | _, 0 -> OnXAxis
   | _, _ -> SomewhereElse
 
-printfn $"0/0 -> %A{describePoint 0 0}"
-printfn $"0/5 -> %A{describePoint 0 5}"
-printfn $"3/0 -> %A{describePoint 3 0}"
-printfn $"2/3 -> %A{describePoint 2 3}"
+printfn $"0/0 -> %A{describePoint 0 0}" // 0/0 -> Origin
+printfn $"0/5 -> %A{describePoint 0 5}" // 0/5 -> OnYAxis
+printfn $"3/0 -> %A{describePoint 3 0}" // 3/0 -> OnXAxis
+printfn $"2/3 -> %A{describePoint 2 3}" // 2/3 -> SomewhereElse
 
 #!markdown
 
@@ -51,10 +51,10 @@ let beschreibe l =
   | [x; y] -> sprintf "zwei Werte: %d und %d" x y
   | x::y::z::rest -> sprintf "beginnt mit %d, %d, %d" x y z
 
-printfn "[] ist eine %s" (beschreibe [])
-printfn "[1] enthält %s" (beschreibe [1])
-printfn "[1; 2] enthält %s" (beschreibe [1; 2])
-printfn "[1; 2; 3; 4] %s" (beschreibe [1; 2; 3; 4])
+printfn "[] ist eine %s" (beschreibe []) // [] ist eine leere Liste
+printfn "[1] enthält %s" (beschreibe [1]) // [1] enthält einen Wert: 1
+printfn "[1; 2] enthält %s" (beschreibe [1; 2]) // [1; 2] enthält zwei Werte: 1 und 2
+printfn "[1; 2; 3; 4] %s" (beschreibe [1; 2; 3; 4]) // [1; 2; 3; 4] beginnt mit 1, 2, 3
 
 #!fsharp
 
@@ -66,7 +66,7 @@ let rec quicksort = function
       let smaller, larger = List.partition ((>=) x) xs
       quicksort smaller @ [x] @ quicksort larger
 
-printfn "%A" (quicksort [3; 6; 8; 10; 1; 2; 1])
+printfn "%A" (quicksort [3; 6; 8; 10; 1; 2; 1]) // [1; 1; 2; 3; 6; 8; 10]
 
 #!markdown
 
@@ -78,11 +78,11 @@ let beschreibe x =
   match x with
   | x when x > 0 -> "positiv"
   | x when x < 0 -> "negativ"
-  | _ -> "Null"
+  | _ -> "null"
 
-printfn "5 ist %s" (beschreibe 5)
-printfn "-5 ist %s" (beschreibe -5)
-printfn "0 ist %s" (beschreibe 0)
+printfn "5 ist %s" (beschreibe 5) // 5 ist positiv
+printfn "-5 ist %s" (beschreibe -5) // -5 ist negativ
+printfn "0 ist %s" (beschreibe 0) // 0 ist null
 
 #!markdown
 
@@ -95,8 +95,8 @@ let beschreibe o =
   | Some x -> sprintf "den Wert %d" x
   | None -> "keinen Wert"
 
-printfn "Some 5 enthält %s" (beschreibe (Some 5))
-printfn "None enthält %s" (beschreibe None)
+printfn "Some 5 enthält %s" (beschreibe (Some 5)) // Some 5 enthält den Wert 5
+printfn "None enthält %s" (beschreibe None) // None enthält keinen Wert
 
 #!markdown
 
@@ -110,11 +110,11 @@ type Shape =
 
 let beschreibe s =
   match s with
-  | Circle radius -> sprintf "Kreis mit Radius %f" radius
-  | Rectangle (width, height) -> sprintf "Rechteck mit Breite %f und Höhe %f" width height
+  | Circle radius -> sprintf "Kreis mit Radius %.2f" radius
+  | Rectangle (width, height) -> sprintf "Rechteck mit Breite %.2f und Höhe %.2f" width height
 
-printfn "Kreis 5.0 ist ein %s" (beschreibe (Circle 5.0))
-printfn "Rechteck 3.0x4.0 ist ein %s" (beschreibe (Rectangle (3.0, 4.0)))
+printfn "Kreis 5.0 ist ein %s" (beschreibe (Circle 5.0)) // Kreis 5.0 ist ein Kreis mit Radius 5.00
+printfn "Rechteck 3.0x4.0 ist ein %s" (beschreibe (Rectangle (3.0, 4.0))) // Rechteck 3.0x4.0 ist ein Rechteck mit Breite 3.00 und Höhe 4.00
 
 #!markdown
 
@@ -129,8 +129,8 @@ let beschreibe p =
   | { Name = "Holger"; Age = 51 } -> "Holger, 51 Jahre"
   | { Name = name; Age = age } -> sprintf "%s ist %d Jahre alt" name age
 
-printfn "Holger-Objekt: %s" (beschreibe { Name = "Holger"; Age = 51 })
-printfn "Oli-Objekt: %s" (beschreibe { Name = "Oli"; Age = 50 })
+printfn "Holger-Objekt: %s" (beschreibe { Name = "Holger"; Age = 51 }) // Holger-Objekt: Holger, 51 Jahre
+printfn "Oli-Objekt: %s" (beschreibe { Name = "Oli"; Age = 50 }) // Oli-Objekt: Oli ist 50 Jahre alt
 
 #!markdown
 
@@ -144,9 +144,9 @@ let beschreibe (x: obj) =
   | :? string as s -> sprintf "string: %s" s
   | _ -> "unbekannter Typ"
 
-printfn "42 ist ein %s" (beschreibe 42)
-printfn "\"Hallo\" ist ein %s" (beschreibe "Hallo")
-printfn "true ist ein %s" (beschreibe true)
+printfn "42 ist ein %s" (beschreibe 42) // 42 ist ein int: 42
+printfn "\"Hallo\" ist ein %s" (beschreibe "Hallo") // "Hallo" ist ein string: Hallo
+printfn "true ist ein %s" (beschreibe true) // true ist ein unbekannter Typ
 
 #!markdown
 
@@ -164,8 +164,8 @@ let beschreibe x =
   | Cool -> "coole Zahl"
   | Langweilig -> "langweilige Zahl"
 
-printfn "42 ist eine %s" (beschreibe 42)
-printfn "17 ist eine %s" (beschreibe 17)
+printfn "42 ist eine %s" (beschreibe 42) // 42 ist eine coole Zahl
+printfn "17 ist eine %s" (beschreibe 17) // 17 ist eine langweilige Zahl
 
 #!fsharp
 
@@ -181,6 +181,6 @@ let beschreibe x =
   | Langweilig -> "langweilige Zahl"
   | _ -> "weder coole noch langweilige Zahl"
 
-printfn "42 ist eine %s" (beschreibe 42)
-printfn "17 ist eine %s" (beschreibe 17)
-printfn "5 ist eine %s" (beschreibe 5)
+printfn "42 ist eine %s" (beschreibe 42) // 42 ist eine coole Zahl
+printfn "17 ist eine %s" (beschreibe 17) // 17 ist eine langweilige Zahl
+printfn "5 ist eine %s" (beschreibe 5) // 5 ist eine weder coole noch langweilige Zahl
