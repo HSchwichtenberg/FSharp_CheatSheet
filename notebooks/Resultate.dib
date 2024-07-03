@@ -14,13 +14,13 @@ let div x y =
   if y = 0 then Error "Division by zero"
   else Ok (x / y)
 
-printfn "%A" (div 10 2)
-printfn "%A" (div 10 0)
+printfn "%A" (div 84 2) // 42
+printfn "%A" (div 84 0) // Error "Division by zero"
 
 // Auswerten von Ergebnissen
-let result = div 10 2
+let result = div 84 2
 match result with
-| Ok x -> printfn "Ergebnis: %d" x
+| Ok x -> printfn "Ergebnis: %d" x // Ergebnis: 42
 | Error msg -> printfn "Fehler: %s" msg
 
 #!markdown
@@ -45,7 +45,7 @@ let calcSequence x =
   div 20 x
   |> Result.map square
   |> Result.bind (fun x -> div x 2)
-  |> Result.map (add 5)
+  |> Result.map (add 30)
 
-printfn "%A" (calcSequence 4)
-printfn "%A" (calcSequence 0)
+printfn "%A" (calcSequence 4) // 42
+printfn "%A" (calcSequence 0) // Error "Division durch Null"
