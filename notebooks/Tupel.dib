@@ -14,24 +14,28 @@ let person1 = "Oli", "Sturm", 50
 // Eigener Tupel-Typ - rein kosmetisch
 type PersonTupel = string * string * int
 
-// Typ muss spezifisch angegeben werden, sonst wird er nicht verwendet
+// Typ muss explizit angegeben werden, sonst wird er nicht verwendet
 let person2: PersonTupel = "Holger", "Schwichtenberg", 51
 
 // Dekomposition des Tupels bei der Übergabe
 let ausgabe (vorname, name, alter) = 
-  printfn "%s %s ist %d Jahre alt" vorname name alter
+  printfn "%s %s ist %d Jahre alt." vorname name alter
 
 // Beide Werte sind kompatibel
-ausgabe person1
-ausgabe person2
+ausgabe person1 // Oli Sturm ist 50 Jahre alt.
+ausgabe person2 // Holger Schwichtenberg ist 51 Jahre alt.
 
 #!markdown
 
 ## Hilfsfunktionen
 
+#!markdown
+
+fst = first und snd = second
+
 #!fsharp
 
 let person = "Oli", 50
 
-printfn "Erster Teil: %A" (fst person) // fst = first
-printfn "Zweiter Teil: %A" (snd person) // snd = second
+printfn "Erster Teil: %A" (fst person) // Oli
+printfn "Zweiter Teil: %A" (snd person) // 50
