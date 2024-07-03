@@ -17,10 +17,10 @@ type Rectangle =
 let r1 = { Width = 10.0; Height = 20.0 }
 
 // An diesem Punkt existiert die Methode GetArea noch nicht
-//printfn "Area of %A: %f" r1 (r1.GetArea())
+// printfn "Area of %A: %f" r1 (r1.GetArea())
 
 // Hier wird die Methode GetArea nachträglich hinzugefügt.
-// Dies kann auch in einer anderen Datei geschehen.
+// Dies kann auch in einer anderen Datei geschehen!
 type Rectangle with
   member x.GetArea() = x.Width * x.Height
 
