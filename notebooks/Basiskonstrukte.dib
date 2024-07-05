@@ -28,7 +28,7 @@ let b : string = "Oliver Sturm";
 
 #!markdown
 
-Variablen sind im Standard unveränderlich. Erst mit dem Zusatz mutable kann man sie ändern.
+Variablen sind in F# im Standard unveränderlich. Erst mit dem Zusatz mutable kann man sie ändern.
 
 #!fsharp
 
