@@ -86,37 +86,38 @@ let mutable nullableZahl = Nullable(42) // Nullable Ganzzahl
 
 #!fsharp
 
- printf "verschiedene Möglichkeiten " // Ausgabe ohne Umbruch
- printfn "für Bildschirmausgaben" // Ausgabe mit Umbruch
+printf "Ausgabe ohne Umbruch" 
+printfn "Ausgabe mit Umbruch" 
+Console.WriteLine "Ausgabe mit .NET-Klasse System.Console" 
 
- printfn "Ganzzahl: %d" zahl // Ganzzahl: 42
- printfn "Kommazahl: %f" gebrocheneZahl // Kommazahl: 42.50000
- printfn "Kommazahl: %8.4f" gebrocheneZahl // Kommazahl: 42.5000
- printfn "Kommazahl: %08.4f" gebrocheneZahl // Kommazahl: 042.5000
- printfn "Hexadezimalzahl: %x" zahl // Hexadezimalzahl: 2a
- printfn "Oktalzahl: %o" zahl // Oktalzahl: 52
- printfn "Binärzahl: %B" zahl // Binärzahl: 101010
- printfn "Gleitkommatyp: %e" gebrocheneZahl // Ausgabe ohne Umbruch
- printfn "Zeichenkette: %s" pfad // Zeichenkette: C:\Temp
- printfn "Bool: %b" bool // Bool: true
- printfn "Datum: %O" datum // Datum: 15.07.2024 00:00:00
- printfn "RegEx: %O" regEx // RegEx:a[0-9]
+printfn "Ganzzahl: %d" zahl // Ganzzahl: 42
+printfn "Kommazahl: %f" gebrocheneZahl // Kommazahl: 42.50000
+printfn "Kommazahl: %8.4f" gebrocheneZahl // Kommazahl: 42.5000
+printfn "Kommazahl: %08.4f" gebrocheneZahl // Kommazahl: 042.5000
+printfn "Hexadezimalzahl: %x" zahl // Hexadezimalzahl: 2a
+printfn "Oktalzahl: %o" zahl // Oktalzahl: 52
+printfn "Binärzahl: %B" zahl // Binärzahl: 101010
+printfn "Gleitkommatyp: %e" gebrocheneZahl // Ausgabe ohne Umbruch
+printfn "Zeichenkette: %s" pfad // Zeichenkette: C:\Temp
+printfn "Bool: %b" bool // Bool: true
+printfn "Datum: %O" datum // Datum: 15.07.2024 00:00:00
+printfn "RegEx: %O" regEx // RegEx:a[0-9]
 
- printfn "Zahl oder null: %A" nullableZahl // Zahl oder null: 42
- nullableZahl <- Nullable() // null zuweisen geht nicht mit null!
- printfn "Zahl oder null: %A" nullableZahl // Zahl oder null: <null>
- Console.WriteLine("null an Methode übergeben: {0}", null);
+printfn "Zahl oder null: %A" nullableZahl // Zahl oder null: 42
+nullableZahl <- Nullable() // null zuweisen geht nicht mit null!
+printfn "Zahl oder null: %A" nullableZahl // Zahl oder null: <null>
+Console.WriteLine("null an Methode übergeben: {0}", null);
 
- // Ausgabe mehrerer Werte
- printfn "%s ist älter als %d" b a // Oliver Sturm ist älter als 42
- // Ausgabe mit .NET-Klasse System.Console
- Console.WriteLine(b + " ist älter als  " + a.ToString() + ".") // Oliver Sturm ist älter als 42
- // Ausgabe in eine Zeichenkette
- let ausgabe = sprintf "%s ist älter als %d" b a
- printfn "%s" ausgabe
+// Ausgabe mehrerer Werte
+printfn "%s ist älter als %d" b a // Oliver Sturm ist älter als 42
+// Ausgabe mit .NET-Klasse System.Console
+Console.WriteLine(b + " ist älter als  " + a.ToString() + ".") // Oliver Sturm ist älter als 42
+// Ausgabe in eine Zeichenkette
+let ausgabe = sprintf "%s ist älter als %d" b a
+printfn "%s" ausgabe
 
- // Ausgabe von interpolierten Zeichenketten (NUR ZUR KONTROLLE, nicht im Cheat Sheet)
- printfn "%s" ausgabe1 // Oliver Sturm ist älter als 42
- printfn "%s" ausgabe2 // Autoren:\nOliver Sturm\nund\nDr. Holger Schwichtenberg
- printfn "%s" ausgabe3 // Autoren:\nOliver Sturm\nund\nDr. Holger Schwichtenberg
- printfn "%s" ausgabe4 // Die Zahl 42 ist eine gerade Zahl.
+// Ausgabe von interpolierten Zeichenketten (NUR ZUR KONTROLLE, nicht im Cheat Sheet)
+printfn "%s" ausgabe1 // Oliver Sturm ist älter als 42
+printfn "%s" ausgabe2 // Autoren:\nOliver Sturm\nund\nDr. Holger Schwichtenberg
+printfn "%s" ausgabe3 // Autoren:\nOliver Sturm\nund\nDr. Holger Schwichtenberg
+printfn "%s" ausgabe4 // Die Zahl 42 ist eine gerade Zahl.
