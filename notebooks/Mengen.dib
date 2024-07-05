@@ -44,7 +44,7 @@
 
  let set = Set.ofList [1; 2; 3; 4; 5]
  printfn "Set: %A" set // Set: set [1; 2; 3; 4; 5]
- // printfn "3. Element in Set: %A" set.toList [2] // nicht erlaubt
+ // printfn "3. Element in Set: %A" set.toList[2] // nicht erlaubt
  let neuesSet = set.Add(6)
  printfn "Neues Set: %A" neuesSet // Set: set [1; 2; 3; 4; 5; 6]
  
