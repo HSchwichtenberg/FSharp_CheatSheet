@@ -53,7 +53,7 @@ loopDoWhile 1
 
 ## Rekursive Alternativen zu Schleifen
 
-Der traditionell typische Ansatz in funktionalen Sprachen. Der F#-Kompiler kann die Rekursion optimieren, so dass sie nicht zu einem Stack-Overflow führt.
+Dies ist der traditionell/typische Ansatz für Wiederholungen in funktionalen Sprachen. Der F#-Kompiler kann die Rekursion optimieren, so dass sie nicht zu einem Stack-Overflow führt.
 
 #!fsharp
 
