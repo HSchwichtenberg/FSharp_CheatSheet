@@ -32,13 +32,11 @@ Variablen sind im Standard unveränderlich. Erst mit dem Zusatz mutable kann man
 
 #!fsharp
 
- let a = 42 // Unveränderbarer Wert (Zahl)
- // a <- a + 1 // nicht möglich
-
- let b = "Oliver Sturm" // Unveränderbarer Wert (Zeichenkette)
-
- let mutable c = "Holger Schwichtenberg"  // Veränderbare Variable
- c <- "Dr. " + c
+let a = 42 // Unveränderbarer Wert (Zahl)
+// a <- a + 1 // nicht möglich
+let b = "Oliver Sturm" // Unveränderbarer Wert (Zeichenkette)
+let mutable c = "Holger Schwichtenberg"  // Veränderbare Variable
+c <- "Dr. " + c
 
 #!markdown
 
@@ -46,41 +44,41 @@ Variablen sind im Standard unveränderlich. Erst mit dem Zusatz mutable kann man
 
 #!fsharp
 
- // Zahlen
- let zahl = 42
- let gebrocheneZahl = 42.5 
- let grosseZahl = 42_000_000_000.123 
+// Zahlen
+let zahl = 42
+let gebrocheneZahl = 42.5 
+let grosseZahl = 42_000_000_000.123 
 
- // Zeichenketten
- let autor1 = "Oliver\nSturm" // Zeichenkette mit Escape-Sequenz
- let autor2 = """Holger 
+// Zeichenketten
+let autor1 = "Oliver\nSturm" // Zeichenkette mit Escape-Sequenz
+let autor2 = """Holger 
 Schwichtenberg""" // Zeichenkette mit drei Anführungszeichen und Umbruch
- let pfad = @"C:\temp" // Zeichenkette mit Verbatim-String
+let pfad = @"C:\temp" // Zeichenkette mit Verbatim-String
 
- // String-Interpolation
- // Interpolierte Zeichenkette (Template String)
- let ausgabe1 = $"{autor1} ist älter als {zahl}."
- // Interpolierte Zeichenkette mit Umbruch
- let ausgabe2 = $"Autoren:\n{autor1}\nund\n{autor2}"
+// String-Interpolation
+// Interpolierte Zeichenkette (Template String)
+let ausgabe1 = $"{autor1} ist älter als {zahl}."
+// Interpolierte Zeichenkette mit Umbruch
+let ausgabe2 = $"Autoren:\n{autor1}\nund\n{autor2}"
    // Interpolierte Zeichenkette mit drei Anführungszeichen und Umbruch
- let ausgabe3 = $"""Autoren: 
+let ausgabe3 = $"""Autoren: 
 {autor1}
 und
 {autor2}"""
- // Interpolierte Zeichenkette mit drei Anführungszeichen und Ausdruck
- let ausgabe4 = $"""Die Zahl {a} ist eine {if a % 2 = 0 then "gerade" else "ungerade"} Zahl."""
+// Interpolierte Zeichenkette mit drei Anführungszeichen und Ausdruck
+let ausgabe4 = $"""Die Zahl {a} ist eine {if a % 2 = 0 then "gerade" else "ungerade"} Zahl."""
 
- // Boolean
- let bool = true
+// Boolean
+let bool = true
 
- // Regex
- let regEx = System.Text.RegularExpressions.Regex("a[0-9]")
+// Regex
+let regEx = System.Text.RegularExpressions.Regex("a[0-9]")
 
- // Datum
- let datum = System.DateTime(2024, 7, 15)
+// Datum
+let datum = System.DateTime(2024, 7, 15)
 
  // Nullable, zum Austausch mit anderen .NET-Sprachen
- let mutable nullableZahl = Nullable(42) // Nullable Ganzzahl
+let mutable nullableZahl = Nullable(42) // Nullable Ganzzahl
 
 #!markdown
 
