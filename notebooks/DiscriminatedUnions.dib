@@ -65,8 +65,8 @@ let buchungen =
     Ausgehend(LieferantenNummer(37), 40);
   ]
 
-// Die Verarbeitung der Buchungen kann mit Pattern Matching erfolgen
-// Hier wird der Bestand je Produkt berechnet
+// Die Verarbeitung der Buchungen kann mit Pattern Matching erfolgen.
+// Hier wird der Bestand je Produkt berechnet.
 let bestand = 
   buchungen
   |> List.fold (fun bestand -> function
