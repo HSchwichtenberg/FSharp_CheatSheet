@@ -86,6 +86,10 @@ printfn "nullableZahl hat Wert: %A" nullableZahl // Ausgabe: nullableZahl hat We
 
 ## Bildschirmausgaben
 
+#!markdown
+
+**Hinweis: Dieser Codeblock erfordert, dass die vorherigen Codeblöcke mit den Variablendefinitionen ausgeführt wurden.**
+
 #!fsharp
 
 printf "Ausgabe ohne Umbruch" 
