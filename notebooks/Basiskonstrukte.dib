@@ -113,7 +113,7 @@ Console.WriteLine("null an Methode übergeben: {0}", null);
 // Ausgabe mehrerer Werte
 printfn "%s ist älter als %d" b a // Oliver Sturm ist älter als 42
 // Ausgabe mit .NET-Klasse System.Console
-Console.WriteLine(b + " ist älter als  " + a.ToString() + ".") // Oliver Sturm ist älter als 42
+Console.WriteLine (b + " ist älter als  " + a.ToString() + ".") // Oliver Sturm ist älter als 42
 // Ausgabe in eine Zeichenkette
 let ausgabe = sprintf "%s ist älter als %d" b a
 printfn "%s" ausgabe
