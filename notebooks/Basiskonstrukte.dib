@@ -79,7 +79,7 @@ let datum = System.DateTime(2024, 7, 15)
 
  // Nullable, zum Austausch mit anderen .NET-Sprachen
 let mutable nullableZahl = Nullable(42) // Nullable Ganzzahl
-nullableZahl <- System.Nullable() // Anderen Wert zuweisen
+nullableZahl <- Nullable() // Anderen Wert zuweisen
 printfn "nullableZahl hat Wert: %A" nullableZahl // Ausgabe: nullableZahl hat Wert: <null>
 
 #!markdown
