@@ -78,7 +78,7 @@ printfn "%d Passagiere im Standard-Auto" standardAuto.AnzahlPassagiere
 let roterRiese = RoterRiese()
 roterRiese.AnzahlPassagiere <- 2
 printfn "%d Passagiere im roten Riesen" roterRiese.AnzahlPassagiere
-roterRiese.AnzahlPassagiere <- 4 // Fehler
+roterRiese.AnzahlPassagiere <- 4 // System.Exception: "Nur zwei Passagiere erlaubt"
 
 #!markdown
 
